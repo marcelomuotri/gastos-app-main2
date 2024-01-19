@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": [
+      "ESNext"
+    ],
+    "types": [
+      "react",
+      "react-native",
+      "node"
+    ],
+    "rootDir": "./src",
+    "outDir": "./build",
+    
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+, "src/state/store.js"  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "extends": "expo/tsconfig.base"
+}

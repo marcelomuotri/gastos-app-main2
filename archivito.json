@@ -1,0 +1,82 @@
+[
+    {
+        "_id": "60f6a7c8b123a5e4dcb89021",
+        "category": "6511d1317051bedd9c815966",
+        "amount": 50.00,
+        "date": "2023-10-01T09:15:00.000Z",
+        "description": "Compra en supermercado",
+        "user": "1"
+    },
+    {
+        "_id": "60f6a7f1b123a5e4dcb89022",
+        "category": "6511e36c7051bedd9c81596d",
+        "amount": 20.00,
+        "date": "2023-10-02T11:30:00.000Z",
+        "description": "Recarga de tarjeta de transporte",
+        "user": "1"
+    },
+    {
+        "_id": "60f6a802b123a5e4dcb89023",
+        "category": "6511e4087051bedd9c81596e",
+        "amount": 150.00,
+        "date": "2023-10-03T14:45:00.000Z",
+        "description": "Cena en restaurante",
+        "user": "1"
+    },
+    {
+        "_id": "60f6a810b123a5e4dcb89024",
+        "category": "6511f2597051bedd9c815970",
+        "amount": 70.00,
+        "date": "2023-10-04T17:05:00.000Z",
+        "description": "Ropa nueva",
+        "user": "1"
+    },
+    {
+        "_id": "60f6a818b123a5e4dcb89025",
+        "category": "6511f2757051bedd9c815971",
+        "amount": 25.50,
+        "date": "2023-10-05T09:50:00.000Z",
+        "description": "Compra de libros",
+        "user": "1"
+    },
+    {
+        "_id": "60f6a820b123a5e4dcb89026",
+        "category": "6511d1317051bedd9c815966",
+        "amount": 15.75,
+        "date": "2023-10-06T10:20:00.000Z",
+        "description": "Desayuno en cafetería",
+        "user": "1"
+    },
+    {
+        "_id": "60f6a828b123a5e4dcb89027",
+        "category": "6511e36c7051bedd9c81596d",
+        "amount": 30.00,
+        "date": "2023-10-07T12:35:00.000Z",
+        "description": "Pago de servicios",
+        "user": "1"
+    },
+    {
+        "_id": "60f6a82fb123a5e4dcb89028",
+        "category": "6511e4087051bedd9c81596e",
+        "amount": 120.00,
+        "date": "2023-10-08T15:10:00.000Z",
+        "description": "Muebles para el hogar",
+        "user": "1"
+    },
+    {
+        "_id": "60f6a838b123a5e4dcb89029",
+        "category": "6511f2597051bedd9c815970",
+        "amount": 10.50,
+        "date": "2023-10-09T08:15:00.000Z",
+        "description": "Café y croissant",
+        "user": "1"
+    },
+    {
+        "_id": "60f6a840b123a5e4dcb8902A",
+        "category": "6511f2757051bedd9c815971",
+        "amount": 80.00,
+        "date": "2023-10-10T20:25:00.000Z",
+        "description": "Entradas para concierto",
+        "user": "1"
+    }
+]

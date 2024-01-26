@@ -14,7 +14,6 @@ const ProfileModal: React.FC<iProfileModalProps> = ({ isVisible, onClose }) => {
   const { logoutUser } = useAuthService()
   const navigation = useNavigation()
   const authenticated = useSelector((state: RootState) => state.auth.user)
-  console.log(authenticated)
   const userName = authenticated?.name ?? 'unknown'
   const userAvatar =
     'https://ui-avatars.com/api/?name=Jon+Snow&background=0D8ABC&color=fff&size=128'

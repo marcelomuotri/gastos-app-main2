@@ -10,7 +10,7 @@ const theme = createTheme({
     },
   },
   colors: {
-    primary: 'blue',
+    primary: '#145bcc',
     background: '#f0f0f0', // Tu color de fondo global
   },
 })

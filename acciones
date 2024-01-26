@@ -10,3 +10,13 @@ HomeScreen:
   DIA: Abre un modal para seleccionar una fecha deseada para ver los gastos
   SEMANA: se puede elegir semana 1 , 2 ,3, 4 o la cantidad de semanas que tenga el mes
   PERSONALIZADO: Se abre el calendario y vos podes elegir entre un intervalo de fechas
+
+BARRA DE ARRIBA:
+
+- Por mes. OK.-
+- por dia.
+- personalizado.
+
+API FRONT:
+
+- hacer un archivo de api para cada endpoint para llamar de distintas maneras.

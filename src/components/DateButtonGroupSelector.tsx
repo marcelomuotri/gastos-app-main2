@@ -1,28 +1,34 @@
 import React, { useState } from 'react'
-import { Platform, TouchableOpacity } from 'react-native'
-import { Button, ButtonGroup, Text } from 'react-native-elements'
+import { Platform, StyleSheet, TouchableOpacity } from 'react-native'
+import { Button, ButtonGroup, Text, useTheme } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { LinearGradient } from 'expo-linear-gradient'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { TextInput } from 'react-native-gesture-handler'
+import { getMonthName } from '../utils/dates'
+import MonthModal from './MonthModal'
 
+export interface DateAverage {
+  dateFrom: string
+  dateTo: string
+}
 interface DateButtonGroupSelectorProps {
-  date: Date
-  setDate: (date: Date) => void
+  dates: DateAverage
+  setDates: ({ dateFrom, dateTo }: DateAverage) => void
 }
 
 const DateButtonGroupSelector: React.FC<DateButtonGroupSelectorProps> = ({
-  date,
-  setDate,
+  dates,
+  setDates,
 }) => {
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const { theme } = useTheme()
+  const styles = createStyles(theme)
+  const [selectedIndex, setSelectedIndex] = useState(1)
   const [showPicker, setShowPicker] = useState(false)
-  //const [date, setDate] = useState(new Date())
+  const [showMonthModal, setShowMonthModal] = useState(false)
 
-  const onChangeDate = (event: any, selectedDate: Date) => {
-    const currentDate = selectedDate || date
-    setShowPicker(Platform.OS === 'ios') // Esto mantendrá el picker abierto en iOS después de la selección
-    setDate(currentDate) // Actualiza el estado con la nueva fecha
+  const onChangeDate = (event: any, selectedDate: string) => {
+    setDates({ dateFrom: selectedDate, dateTo: selectedDate }) // Actualiza el estado con la nueva fecha
   }
 
   const onPressButton = (value: number) => {
@@ -30,32 +36,50 @@ const DateButtonGroupSelector: React.FC<DateButtonGroupSelectorProps> = ({
     if (value === 0) {
       setShowPicker(true)
     }
+    if (value === 1) {
+      setShowMonthModal(true)
+    }
     setSelectedIndex(value)
   }
 
   return (
     <>
       <ButtonGroup
-        buttons={['DIA', 'SEMANA', 'PERSONALIZADO']}
+        buttons={['DIA', 'MES', 'PERSONALIZADO']}
         selectedIndex={selectedIndex}
         onPress={(value) => {
           onPressButton(value)
         }}
-        containerStyle={{ marginBottom: 20 }}
+        containerStyle={styles.containerStyle}
+        textStyle={styles.textStyle}
       />
+      {showMonthModal && (
+        <MonthModal setShowMonthModal={setShowMonthModal} setDates={setDates} />
+      )}
       {showPicker && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={date}
+          value={new Date()}
           mode="date"
           is24Hour={true}
           display="default"
           onChange={onChangeDate}
         />
       )}
-      <Text>{date.toLocaleDateString('es-ES')}</Text>
+      <Text>{getMonthName(dates?.dateFrom).toUpperCase()}</Text>
     </>
   )
 }
+
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    containerStyle: {
+      marginBottom: 20,
+      backgroundColor: 'blue',
+    },
+    textStyle: {
+      color: 'white',
+    },
+  })
 
 export default DateButtonGroupSelector

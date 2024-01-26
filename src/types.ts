@@ -14,6 +14,7 @@ export interface iTransaction {
   date: string
   description: string
   user: string
+  transactionDate: string
 }
 
 interface User {

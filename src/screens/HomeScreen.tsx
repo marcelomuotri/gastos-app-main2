@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PieChart from '../components/PieChart'
 import Legend from '../components/Legend'
 import ProfileModal from '../components/ProfileModal'
@@ -13,15 +13,22 @@ import { Button } from '@rneui/base'
 import { useNavigation } from '@react-navigation/native'
 import { useGetFromEndpointQuery } from '../state/api'
 import DateButtonGroupSelector from '../components/DateButtonGroupSelector'
+import dayjs from 'dayjs'
+import { getFirstDayOfMonth, getLastDayOfMonth } from '../utils/dates'
 
 export interface HomeScreenProps {}
 
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   const navigation = useNavigation()
 
-  const [date, setDate] = useState(new Date())
+  const [dates, setDates] = useState({
+    dateFrom: getFirstDayOfMonth(),
+    dateTo: getLastDayOfMonth(),
+  })
+
   const { data, isLoading } = useGetFromEndpointQuery({
     endpoint: 'transactions',
+    filters: dates,
   })
 
   const [profileOpened, setProfileOpened] = useState(false)
@@ -55,7 +62,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               style={styles.profileIcon}
             />
           </TouchableOpacity>
-          <DateButtonGroupSelector date={date} setDate={setDate} />
+          <DateButtonGroupSelector dates={dates} setDates={setDates} />
           <PieChart transactions={transactions} />
           <Legend transactions={transactions} />
           <View style={styles.buttonContainer}>

@@ -21,10 +21,10 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
 }) => (
   <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
     <LinearGradient
-      colors={[color, color]}
+      colors={['#145bcc', 'blue']}
       style={{
         padding: 10,
-        borderRadius: 5,
+        borderRadius: 50,
         margin: 5,
         flexBasis: '33%',
         alignItems: 'center',

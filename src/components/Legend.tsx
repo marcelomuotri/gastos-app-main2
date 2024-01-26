@@ -6,6 +6,7 @@ import { ListItem, Icon } from 'react-native-elements'
 import { useDeleteEntityMutation } from '../state/api'
 import ConfirmationModal from './ConfimationModal'
 import ConfirmationSuccessModal from './ConfirmationSuccessModal'
+import { formatToDayMonth } from '../utils/dates'
 
 type iLegendProps = {
   transactions: iTransaction[]
@@ -81,7 +82,8 @@ const Legend: React.FC<iLegendProps> = ({ transactions }) => {
                 <ListItem key={tIndex} bottomDivider>
                   <ListItem.Content>
                     <ListItem.Title style={styles.subItem}>
-                      {transaction.description}
+                      {transaction.description} -{' '}
+                      {formatToDayMonth(transaction.transactionDate)}
                     </ListItem.Title>
                     <ListItem.Subtitle style={styles.subItem}>
                       ${transaction.amount.toFixed(2)}

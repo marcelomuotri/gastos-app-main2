@@ -9,13 +9,15 @@ import {
 } from 'react-native'
 import { RouteProp } from '@react-navigation/native'
 import { HomeStackParamList } from '../Navigation'
-import { Input, Button } from 'react-native-elements'
+import { Input } from 'react-native-elements'
+import { Button } from '@rneui/base'
 import Icon from 'react-native-vector-icons/Ionicons'
 import CategoryButton from '../components/CategoryButton'
 import { iCategory } from '../types'
 import { useGetFromEndpointQuery, useAddEntityMutation } from '../state/api'
 import { useNavigation } from '@react-navigation/native'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { useTheme } from '@rneui/themed'
 
 type iAddExpenseProps = {
   route: RouteProp<HomeStackParamList, 'AddExpense'>
@@ -23,7 +25,9 @@ type iAddExpenseProps = {
 
 const AddExpense: React.FC<iAddExpenseProps> = ({ route }) => {
   const navigation = useNavigation()
-  const transactions = route?.params?.transactions || []
+  const { theme } = useTheme()
+  const styles = createStyles(theme)
+  //const transactions = route?.params?.transactions || []
   const [amount, setAmount] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [selectedCategory, setSelectedCategory] = useState<iCategory>()
@@ -32,7 +36,7 @@ const AddExpense: React.FC<iAddExpenseProps> = ({ route }) => {
   const [date, setDate] = useState(new Date())
   const [showPicker, setShowPicker] = useState(false)
 
-  const { data } = useGetFromEndpointQuery('categories')
+  const { data } = useGetFromEndpointQuery({ endpoint: 'categories' })
   const categories: iCategory[] = data?.data || []
 
   const handleAddCategory = () => {
@@ -65,6 +69,10 @@ const AddExpense: React.FC<iAddExpenseProps> = ({ route }) => {
     setShowPicker(false)
   }
 
+  const backToHome = () => {
+    ;(navigation as any).navigate('HomeScreen')
+  }
+
   const formatDate = (date: Date) => {
     // Puedes ajustar el formato según tus necesidades
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
@@ -72,6 +80,7 @@ const AddExpense: React.FC<iAddExpenseProps> = ({ route }) => {
 
   return (
     <ScrollView style={styles.container}>
+      <Button onPress={backToHome}>Volver</Button>
       <Input
         placeholder="Ingresa la cantidad"
         keyboardType="numeric"
@@ -138,35 +147,36 @@ const AddExpense: React.FC<iAddExpenseProps> = ({ route }) => {
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#f4f4f4', // Un fondo claro
-  },
-  inputText: {
-    color: '#4a4a4a',
-    fontSize: 18,
-  },
-  categoryContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    marginVertical: 20,
-  },
-  categoryButtonWrapper: {
-    width: '32%',
-    margin: 1,
-  },
-  addButton: {
-    backgroundColor: '#3498db', // Un tono de azul agradable
-    marginVertical: 10,
-    borderRadius: 8,
-    paddingVertical: 12,
-  },
-  buttonText: {
-    fontSize: 18,
-  },
-})
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: '#f4f4f4', // Un fondo claro
+    },
+    inputText: {
+      color: '#4a4a4a',
+      fontSize: 18,
+    },
+    categoryContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      marginVertical: 20,
+    },
+    categoryButtonWrapper: {
+      width: '32%',
+      margin: 1,
+    },
+    addButton: {
+      backgroundColor: theme.colors.primary,
+      marginVertical: 10,
+      borderRadius: 8,
+      paddingVertical: 12,
+    },
+    buttonText: {
+      fontSize: 18,
+    },
+  })
 
 export default AddExpense

@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Platform, StyleSheet, TouchableOpacity } from 'react-native'
-import { Button, ButtonGroup, Text, useTheme } from 'react-native-elements'
+import { Button, ButtonGroup, Text } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { LinearGradient } from 'expo-linear-gradient'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { TextInput } from 'react-native-gesture-handler'
 import { getMonthName } from '../utils/dates'
 import MonthModal from './MonthModal'
+import { useTheme } from '@rneui/themed'
 
 export interface DateAverage {
   dateFrom: string
@@ -32,7 +33,6 @@ const DateButtonGroupSelector: React.FC<DateButtonGroupSelectorProps> = ({
   }
 
   const onPressButton = (value: number) => {
-    console.log(value)
     if (value === 0) {
       setShowPicker(true)
     }
@@ -52,6 +52,7 @@ const DateButtonGroupSelector: React.FC<DateButtonGroupSelectorProps> = ({
         }}
         containerStyle={styles.containerStyle}
         textStyle={styles.textStyle}
+        selectedButtonStyle={styles.selectedButtonStyle}
       />
       {showMonthModal && (
         <MonthModal setShowMonthModal={setShowMonthModal} setDates={setDates} />
@@ -75,10 +76,14 @@ const createStyles = (theme: any) =>
   StyleSheet.create({
     containerStyle: {
       marginBottom: 20,
-      backgroundColor: 'blue',
+      backgroundColor: theme.colors.primary,
+      borderRadius: 10,
     },
     textStyle: {
       color: 'white',
+    },
+    selectedButtonStyle: {
+      backgroundColor: '#c004c7',
     },
   })
 

@@ -13,11 +13,13 @@ import { Input } from 'react-native-elements'
 import { Button } from '@rneui/base'
 import Icon from 'react-native-vector-icons/Ionicons'
 import CategoryButton from '../components/CategoryButton'
+import Header from '../components/Header'
 import { iCategory } from '../types'
 import { useGetFromEndpointQuery, useAddEntityMutation } from '../state/api'
 import { useNavigation } from '@react-navigation/native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useTheme } from '@rneui/themed'
+import CButton from '../components/Basics/CButton'
 
 type iAddExpenseProps = {
   route: RouteProp<HomeStackParamList, 'AddExpense'>
@@ -41,6 +43,7 @@ const AddExpense: React.FC<iAddExpenseProps> = ({ route }) => {
 
   const handleAddCategory = () => {
     console.log('agregar categoria')
+    ;(navigation as any).navigate('AddCategory')
   }
 
   const handleAddTransaction = async () => {
@@ -79,76 +82,83 @@ const AddExpense: React.FC<iAddExpenseProps> = ({ route }) => {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <Button onPress={backToHome}>Volver</Button>
-      <Input
-        placeholder="Ingresa la cantidad"
-        keyboardType="numeric"
-        value={amount}
-        onChangeText={setAmount}
-        leftIcon={<Icon name="logo-euro" size={30} color="#4a4a4a" />}
-        inputStyle={styles.inputText}
-      />
-      <Input
-        placeholder="Descripcion"
-        keyboardType="default"
-        value={description}
-        onChangeText={setDescription}
-        leftIcon={<Icon name="document" size={30} color="#4a4a4a" />}
-        inputStyle={styles.inputText}
-      />
-      <TouchableWithoutFeedback onPress={() => setShowPicker(true)}>
-        <View>
-          <TextInput
-            value={formatDate(date)}
-            style={{ borderWidth: 1, padding: 10 }}
-            editable={false} // Hace que el TextInput no sea editable manualmente
-          />
-        </View>
-      </TouchableWithoutFeedback>
+    <>
+      <Header title={'Añadir gastos'} />
 
-      {showPicker && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode="date"
-          is24Hour={true}
-          display="default"
-          onChange={onChange}
+      <ScrollView style={styles.container}>
+        {/* <Button onPress={backToHome}>Volver</Button> */}
+        <Input
+          placeholder="Ingresa la cantidad"
+          keyboardType="numeric"
+          value={amount}
+          onChangeText={setAmount}
+          leftIcon={<Icon name="logo-euro" size={30} color="#4a4a4a" />}
+          inputStyle={styles.inputText}
         />
-      )}
-      <View style={styles.categoryContainer}>
-        {categories?.map((category, index) => (
-          <View key={index} style={styles.categoryButtonWrapper}>
-            <CategoryButton
-              key={index}
-              label={category.label}
-              iconName={category.icon}
-              selected={selectedCategory?.label === category.label}
-              onPress={() => setSelectedCategory(category)}
-              color={category.color}
+        <Input
+          placeholder="Descripcion"
+          keyboardType="default"
+          value={description}
+          onChangeText={setDescription}
+          leftIcon={<Icon name="document" size={30} color="#4a4a4a" />}
+          inputStyle={styles.inputText}
+        />
+        <TouchableWithoutFeedback onPress={() => setShowPicker(true)}>
+          <View>
+            <TextInput
+              value={formatDate(date)}
+              style={{ borderWidth: 1, padding: 10 }}
+              editable={false} // Hace que el TextInput no sea editable manualmente
             />
           </View>
-        ))}
-      </View>
-      <Button
-        title="Añadir Categoria"
-        onPress={handleAddCategory}
-        buttonStyle={styles.addButton}
-        titleStyle={styles.buttonText}
-      />
-      <Button
-        title="Añadir Gasto"
-        onPress={handleAddTransaction}
-        buttonStyle={styles.addButton}
-        titleStyle={styles.buttonText}
-      />
-    </ScrollView>
+        </TouchableWithoutFeedback>
+
+        {showPicker && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode="date"
+            is24Hour={true}
+            display="default"
+            onChange={onChange}
+          />
+        )}
+        <View style={styles.categoryContainer}>
+          {categories?.map((category, index) => (
+            <View key={index} style={styles.categoryButtonWrapper}>
+              <CategoryButton
+                key={index}
+                label={category.label}
+                iconName={category.icon}
+                selected={selectedCategory?.label === category.label}
+                onPress={() => setSelectedCategory(category)}
+              />
+            </View>
+          ))}
+        </View>
+        <CButton label="Añadir Categoria" handlePress={handleAddCategory} />
+        <CButton label="Añadir Gasto" handlePress={handleAddTransaction} />
+      </ScrollView>
+    </>
   )
 }
 
 const createStyles = (theme: any) =>
   StyleSheet.create({
+    header: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 40,
+      height: 60,
+      backgroundColor: theme.colors.primary,
+      borderBottomLeftRadius: 40,
+      borderBottomRightRadius: 40,
+    },
+    headerText: {
+      color: 'white',
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
     container: {
       flex: 1,
       padding: 20,

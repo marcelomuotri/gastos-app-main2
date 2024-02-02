@@ -5,16 +5,15 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PieChart from '../components/PieChart'
 import Legend from '../components/Legend'
 import ProfileModal from '../components/ProfileModal'
 import { Button } from '@rneui/base'
 import { useNavigation } from '@react-navigation/native'
-import { useGetFromEndpointQuery } from '../state/api'
 import DateButtonGroupSelector from '../components/DateButtonGroupSelector'
-import dayjs from 'dayjs'
 import { getFirstDayOfMonth, getLastDayOfMonth } from '../utils/dates'
+import useGetTransactionsQuery from '../state/apiEndpoints/transactionsApi'
 
 export interface HomeScreenProps {}
 
@@ -26,8 +25,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     dateTo: getLastDayOfMonth(),
   })
 
-  const { data, isLoading } = useGetFromEndpointQuery({
-    endpoint: 'transactions',
+  const { data, isLoading } = useGetTransactionsQuery({
     filters: dates,
   })
 

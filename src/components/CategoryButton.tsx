@@ -5,11 +5,10 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { LinearGradient } from 'expo-linear-gradient'
 
 interface CategoryButtonProps {
-  label: string
+  label?: string
   iconName: string
   selected: boolean
   onPress: () => void
-  color: string
 }
 
 const CategoryButton: React.FC<CategoryButtonProps> = ({
@@ -17,11 +16,10 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
   iconName,
   selected,
   onPress,
-  color,
 }) => (
   <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
     <LinearGradient
-      colors={['#145bcc', 'blue']}
+      colors={['rgb(97 64 236)', 'blue']}
       style={{
         padding: 10,
         borderRadius: 50,
@@ -35,7 +33,7 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
       end={{ x: 1, y: 1 }}
     >
       <Icon name={iconName} size={30} color="white" />
-      <Text style={{ color: 'white', marginTop: 5 }}>{label}</Text>
+      {label && <Text style={{ color: 'white', marginTop: 5 }}>{label}</Text>}
     </LinearGradient>
   </TouchableOpacity>
 )

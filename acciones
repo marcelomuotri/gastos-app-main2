@@ -8,7 +8,7 @@ HomeScreen:
 
 - Agregar botones para cambiar dia, mes y año. Vamos a tener
   DIA: Abre un modal para seleccionar una fecha deseada para ver los gastos
-  SEMANA: se puede elegir semana 1 , 2 ,3, 4 o la cantidad de semanas que tenga el mes
+  SEMANA: se puede elegir semana 1 , 2 ,3, 4 o la cantidad de semanas que tenga el mes. OK.-
   PERSONALIZADO: Se abre el calendario y vos podes elegir entre un intervalo de fechas
 
 BARRA DE ARRIBA:
@@ -20,3 +20,8 @@ BARRA DE ARRIBA:
 API FRONT:
 
 - hacer un archivo de api para cada endpoint para llamar de distintas maneras.
+
+AGREGAR CATEGORIA:
+
+- Agregar screen para agregar categoria. OK.-
+- Hacer funcionalidad para agregar (revisar api para agregar categoria etc)

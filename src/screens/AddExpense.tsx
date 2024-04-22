@@ -145,20 +145,6 @@ const AddExpense: React.FC<iAddExpenseProps> = ({ route }) => {
 
 const createStyles = (theme: any) =>
   StyleSheet.create({
-    header: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 40,
-      height: 60,
-      backgroundColor: theme.colors.primary,
-      borderBottomLeftRadius: 40,
-      borderBottomRightRadius: 40,
-    },
-    headerText: {
-      color: 'white',
-      fontSize: 20,
-      fontWeight: 'bold',
-    },
     container: {
       flex: 1,
       padding: 20,
@@ -172,17 +158,11 @@ const createStyles = (theme: any) =>
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'space-between',
-      marginVertical: 20,
+      marginVertical: 8,
     },
     categoryButtonWrapper: {
       width: '32%',
       margin: 1,
-    },
-    addButton: {
-      backgroundColor: theme.colors.primary,
-      marginVertical: 10,
-      borderRadius: 8,
-      paddingVertical: 12,
     },
     buttonText: {
       fontSize: 18,

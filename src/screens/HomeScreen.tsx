@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native'
 import DateButtonGroupSelector from '../components/DateButtonGroupSelector'
 import { getFirstDayOfMonth, getLastDayOfMonth } from '../utils/dates'
 import useGetTransactionsQuery from '../state/apiEndpoints/transactionsApi'
+import Header from '../components/Header'
 
 export interface HomeScreenProps {}
 
@@ -41,43 +42,46 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     setProfileOpened(true)
   }
   return (
-    <View style={styles.container}>
-      {isLoading ? (
-        <ActivityIndicator size="large" />
-      ) : (
-        <>
-          <ProfileModal
-            isVisible={profileOpened}
-            onClose={() => setProfileOpened(false)}
-          ></ProfileModal>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.profileButton}
-            onPress={handleOpenProfile}
-          >
-            <Image
-              source={require('../../assets/profileAvatar.png')}
-              style={styles.profileIcon}
-            />
-          </TouchableOpacity>
-          <DateButtonGroupSelector dates={dates} setDates={setDates} />
-          <PieChart transactions={transactions} />
-          <Legend transactions={transactions} />
-          <View style={styles.buttonContainer}>
-            <Button color="success" buttonStyle={styles.button}>
-              Agregar Ingreso
-            </Button>
-            <Button
-              color="red"
-              buttonStyle={styles.button}
-              onPress={handleAddExpense}
+    <>
+      <Header title="Inicio" />
+      <View style={styles.container}>
+        {isLoading ? (
+          <ActivityIndicator size="large" />
+        ) : (
+          <>
+            <ProfileModal
+              isVisible={profileOpened}
+              onClose={() => setProfileOpened(false)}
+            ></ProfileModal>
+            {/* <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.profileButton}
+              onPress={handleOpenProfile}
             >
-              Agregar Gasto
-            </Button>
-          </View>
-        </>
-      )}
-    </View>
+              <Image
+                source={require('../../assets/profileAvatar.png')}
+                style={styles.profileIcon}
+              />
+            </TouchableOpacity> */}
+            <DateButtonGroupSelector dates={dates} setDates={setDates} />
+            <PieChart transactions={transactions} />
+            <Legend transactions={transactions} />
+            <View style={styles.buttonContainer}>
+              <Button color="success" buttonStyle={styles.button}>
+                Agregar Ingreso
+              </Button>
+              <Button
+                color="red"
+                buttonStyle={styles.button}
+                onPress={handleAddExpense}
+              >
+                Agregar Gasto
+              </Button>
+            </View>
+          </>
+        )}
+      </View>
+    </>
   )
 }
 
@@ -101,7 +105,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     position: 'relative',
-    top: 25,
+    top: 10,
     left: 170,
     zIndex: 10,
   },
